@@ -8,4 +8,7 @@ public class RegisterRequest {
     private String password;
     private String email;
     private String blogName;
+    // private String bio;
+    // private String avatar;
+    // private String wechatId;
 }

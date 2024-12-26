@@ -1,6 +1,6 @@
-package com.ibat.myblog.config;
+package com.ibat.myblog.Config;
 
-import com.ibat.myblog.security.JwtTokenProvider;
+import com.ibat.myblog.Security.JwtTokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

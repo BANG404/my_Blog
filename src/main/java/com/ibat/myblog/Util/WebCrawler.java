@@ -31,6 +31,9 @@ public class WebCrawler {
     private static final int MAX_DELAY = 3000;
 
     public static String crawl(String url) throws Exception {
+        if (url == null) {
+            throw new IllegalArgumentException("URL cannot be null");
+        }
         int retryCount = 0;
         while (retryCount < MAX_RETRY) {
             try {

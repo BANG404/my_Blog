@@ -23,7 +23,11 @@ public class Media {
     private String picture;
 
     @Column(length = 20)
-    private String type;
+    private String type;  //'影视', '音乐' 枚举 
+
+    
+    @Column(length = 2083)
+    private String url;
 
     @Column(length = 100)
     private String artist;

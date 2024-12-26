@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import lombok.Data;
 import java.util.List;
+
 @Component
 public class AIRequest {
 
@@ -39,6 +40,9 @@ public class AIRequest {
     }
 
     public ResponseEntity<String> makeRequest(String userContent) {
+        if (userContent == null || userContent.trim().isEmpty()) {
+            throw new IllegalArgumentException("Input cannot be null or empty");
+        }
         // Set headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -51,7 +55,16 @@ public class AIRequest {
         // Create messages
         List<Message> messages = List.of(
                 new Message("system",
-                        "You are a media recognizer, tell me the type of media (music, film and television) from the text, tell me the information of the media (name, author), separated by commas."),
+                        "你是一个媒体识别助手。请从文本中识别出音乐或影视作品信息，并按以下规则返回：\n" +
+                        "1. 每个媒体信息占一行\n" +
+                        "2. 信息格式：类型|标题|作者/演唱者\n" +
+                        "3. 类型只能是：音乐、影视\n" +
+                        "4. 分隔符统一使用竖线(|)\n" +
+                        "5. 信息之间不要有空格\n" +
+                        "6. 若找不到作者信息，请填写'未知'\n" +
+                        "示例输出：\n" +
+                        "音乐|起风了|买辣椒也用券\n" +
+                        "影视|流浪地球|郭帆"),
                 new Message("user", userContent));
 
         // Create request body

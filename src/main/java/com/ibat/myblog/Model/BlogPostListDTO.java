@@ -8,7 +8,7 @@ public class BlogPostListDTO {
     private Integer postId;
     private String title;
     private String preview;
-    private String status;
+    private String status;  // 1表示已发布，2表示草稿，3表示已删除
     private Integer viewCount;
     private LocalDateTime publishedAt;
     

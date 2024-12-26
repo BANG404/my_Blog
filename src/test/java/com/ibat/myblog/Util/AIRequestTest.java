@@ -38,7 +38,7 @@ public class AIRequestTest {
         String userContent = "";
 
         // Act & Assert
-        assertThrows(RuntimeException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             aiRequest.makeRequest(userContent);
         });
     }

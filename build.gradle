@@ -1,16 +1,14 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.4.0'
-    id 'io.spring.dependency-management' version '1.1.6'
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.ibat'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(23)
-    }
+    sourceCompatibility = '21'
 }
 
 configurations {
@@ -37,6 +35,43 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation 'org.slf4j:slf4j-api:2.0.7'  // 只保留一个版本
+    implementation 'org.json:json:20231013'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
+    
+    // 添加 Jackson 依赖
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.16.1'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.16.1'
+    // 添加 jsoup 依赖
+    implementation 'org.jsoup:jsoup:1.15.3'
+    
+    // 添加 ROME RSS 依赖
+    implementation 'com.rometools:rome:2.1.0'
+    
+    // 确保使用 logback
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+    
+    // 移除旧的 Knife4j 依赖
+    // implementation 'com.github.xiaoymin:knife4j-openapi3-spring-boot-starter:4.4.0'
+    
+    // 添加新的 Knife4j 依赖
+    implementation 'com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:4.3.0'
+    
+    // 添加 Jakarta EE API
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+    
+    // 添加 Swagger 相关依赖
+    implementation 'io.swagger.core.v3:swagger-annotations:2.2.8'
+    implementation 'io.swagger.core.v3:swagger-models:2.2.8'
+    
+    // 确保使用正确版本的 Knife4j
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 }
 
 tasks.named('test') {

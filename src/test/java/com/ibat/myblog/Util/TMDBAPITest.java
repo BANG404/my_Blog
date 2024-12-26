@@ -69,7 +69,6 @@ public class TMDBAPITest {
     @DisplayName("Should handle API errors")
     @Timeout(5)
     void getMoviePoster_WithAPIError_ThrowsIOException() {
-        // Assert
         assertThrows(IOException.class, () -> {
             tmdbApi.getMoviePoster("The Matrix", "invalid_size");
         });

@@ -2,56 +2,47 @@ package com.ibat.myblog.Controller;
 
 import com.ibat.myblog.Model.Media;
 import com.ibat.myblog.Repository.MediaRepository;
+import com.ibat.myblog.Service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+@Tag(name = "媒体管理", description = "音乐和视频管理接口")
 @RestController
 @RequestMapping("/api/media")
 public class MediaController {
 
     @Autowired
     private MediaRepository mediaRepository;
+    
+    @Autowired
+    private UserService userService;
 
+    @Operation(summary = "获取最新媒体", description = "获取用户最新分享的指定类型媒体")
     @GetMapping("/latest")
-    public ResponseEntity<Map<String, Media>> getLatestMedia(@RequestParam Integer userId) {
-        Map<String, Media> result = new HashMap<>();
-
-        // 获取最新音乐
-        List<Media> latestMusic = mediaRepository.findTop1MusicByUserIdOrderByPublishDateDesc(userId);
-        if (!latestMusic.isEmpty()) {
-            result.put("music", latestMusic.get(0));
-        }
-
-        // 获取最新影视
-        List<Media> latestMovie = mediaRepository.findTop1MovieByUserIdOrderByPublishDateDesc(userId);
-        if (!latestMovie.isEmpty()) {
-            result.put("movie", latestMovie.get(0));
-        }
-
-        return ResponseEntity.ok(result);
-    }
-
-    @GetMapping("/{type}/latest")
-    public ResponseEntity<Media> getLatestByType(
-            @PathVariable String type,
-            @RequestParam Integer userId) {
-
-        List<Media> mediaList;
-        if ("music".equals(type)) {
-            mediaList = mediaRepository.findTop1MusicByUserIdOrderByPublishDateDesc(userId);
-        } else if ("movie".equals(type)) {
-            mediaList = mediaRepository.findTop1MovieByUserIdOrderByPublishDateDesc(userId);
-        } else {
+    public ResponseEntity<Media> getLatestMedia(
+            @Parameter(description = "用户名", required = true) 
+            @RequestParam String username,
+            @Parameter(description = "媒体类型(音乐/影视)", required = true) 
+            @RequestParam String type) {
+        
+        // 参数验证
+        if (!type.equals("音乐") && !type.equals("影视")) {
             return ResponseEntity.badRequest().build();
         }
 
-        return mediaList.isEmpty() ?
-                ResponseEntity.notFound().build() :
-                ResponseEntity.ok(mediaList.get(0));
+        try {
+            Integer userId = userService.findUserIdByUsername(username);
+            Media latestMedia = mediaRepository
+                .findFirstByUserIdAndTypeOrderByPublishDateDesc(userId, type)
+                .orElse(null);
+            return ResponseEntity.ok(latestMedia);
+                    
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
