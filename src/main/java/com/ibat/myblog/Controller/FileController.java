@@ -2,12 +2,17 @@ package com.ibat.myblog.Controller;
 
 import com.ibat.myblog.Model.FileUpload;
 import com.ibat.myblog.Service.FileService;
-import com.ibat.myblog.Util.FileUtil;
+import com.ibat.myblog.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Parameter;
+
+// import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,13 +28,19 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
+    @Autowired
+    private UserService userService;
+
     @Operation(summary = "上传文件", description = "上传单个文件")
-    @PostMapping("/upload")
+    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> uploadFile(
             @Parameter(description = "要上传的文件", required = true)
             @RequestParam("file") MultipartFile file) {
         try {
-            FileUpload uploadedFile = fileService.storeFile(file);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String username = authentication.getName();
+            Integer userId = userService.findUserIdByUsername(username);
+            FileUpload uploadedFile = fileService.storeFile(file, userId);
             Map<String, Object> response = new HashMap<>();
             response.put("filename", uploadedFile.getFilename());
             response.put("url", uploadedFile.getUrl());

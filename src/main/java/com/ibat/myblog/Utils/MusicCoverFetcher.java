@@ -1,4 +1,4 @@
-package com.ibat.myblog.Util;
+package com.ibat.myblog.Utils;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

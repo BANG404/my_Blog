@@ -1,8 +1,6 @@
-package com.ibat.myblog.Util;
+package com.ibat.myblog.Utils;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.*;
 import java.io.IOException;

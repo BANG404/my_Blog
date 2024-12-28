@@ -1,13 +1,8 @@
-package com.ibat.myblog.Util;
+package com.ibat.myblog.Utils;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
+
 import java.io.IOException;
-
-import java.util.Map;
-import java.util.function.Supplier;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class QQmusicAPITest {
     @Test

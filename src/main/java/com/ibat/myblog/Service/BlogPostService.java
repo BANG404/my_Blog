@@ -2,7 +2,7 @@ package com.ibat.myblog.Service;
 
 import com.ibat.myblog.Model.*;
 import com.ibat.myblog.Repository.*;
-import com.ibat.myblog.Util.*;
+import com.ibat.myblog.Utils.*;
 
 import jakarta.transaction.Transactional;
 
@@ -64,6 +64,7 @@ public class BlogPostService {
         try {
             ResponseEntity<String> aiResponse = aiRequest.makeRequest(blogPost.getContent());
             if (aiResponse.getStatusCode() == HttpStatus.OK && aiResponse.getBody() != null) {
+                System.out.println(aiResponse.getBody());
                 List<Media> mediaList = parseAIResponse(aiResponse.getBody());
                 for (Media media : mediaList) {
                     media.setUserId(blogPost.getUserId());

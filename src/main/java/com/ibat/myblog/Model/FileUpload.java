@@ -12,6 +12,7 @@ public class FileUpload {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
+    @Column(nullable = false)
     private Integer userId;
     
     @Column(length = 255)

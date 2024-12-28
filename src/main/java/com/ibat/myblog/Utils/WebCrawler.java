@@ -1,4 +1,4 @@
-package com.ibat.myblog.Util;
+package com.ibat.myblog.Utils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -11,7 +11,6 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

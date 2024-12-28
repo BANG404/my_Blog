@@ -1,4 +1,4 @@
-package com.ibat.myblog.Util;
+package com.ibat.myblog.Utils;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

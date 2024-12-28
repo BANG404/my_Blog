@@ -1,4 +1,4 @@
-package com.ibat.myblog.Util;
+package com.ibat.myblog.Utils;
 
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -61,7 +61,7 @@ public class AIRequest {
                         "3. 类型只能是：音乐、影视\n" +
                         "4. 分隔符统一使用竖线(|)\n" +
                         "5. 信息之间不要有空格\n" +
-                        "6. 若找不到作者信息，请填写'未知'\n" +
+                        "6. 若找不到作者信息，询问 ai，如果查不到，请填写'未知'\n" +
                         "示例输出：\n" +
                         "音乐|起风了|买辣椒也用券\n" +
                         "影视|流浪地球|郭帆"),

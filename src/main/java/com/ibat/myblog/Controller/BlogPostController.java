@@ -50,7 +50,7 @@ public class BlogPostController {
         blogPost.setUserId(userId);
         
         blogPost.setStatus("1"); // 1表示已发布，2表示草稿，3表示已删除
-
+        
         // 设置创建时间
         blogPost.setPublishedAt(LocalDateTime.now());
         blogPost.setCreatedAt(LocalDateTime.now());
