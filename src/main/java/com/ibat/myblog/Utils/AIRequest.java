@@ -10,7 +10,7 @@ import java.util.List;
 public class AIRequest {
 
     private static final String API_URL = "https://api.luee.net/v1/chat/completions";
-    private static final String AUTH_TOKEN = "sk-H76LbJpPJEZ8EiWtBc66F6Ed2cA64d01B30483547768C7Ee";
+    private static final String AUTH_TOKEN = "your key";
     private final RestTemplate restTemplate;
 
     public AIRequest() {
